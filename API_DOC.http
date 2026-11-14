@@ -1,0 +1,19 @@
+# api call for signup view
+###
+POST http://127.0.0.1:8000/user/
+Content-Type: application/json
+
+{
+    "username": "sreerag",
+    "email": "sreerag@gmail.com",
+    "password": "Password@123",
+    "phone": "9876543210",
+    "dob": "2003-05-15"
+}
+
+
+#api call for expense listing
+###
+GET http://127.0.0.1:8000/expense/
+Accept: application/json
+Authorization: Basic django:password@123
