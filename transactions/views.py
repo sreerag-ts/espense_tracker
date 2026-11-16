@@ -27,4 +27,18 @@ class ExpenseListCreateView(APIView):
 
         return Response(serializer_instance.data)
 
+
+class ExpenseRetrieveUpdateDeleteView(APIView):
+
+    authentication_classes=[authentication.BaseAuthentication]
+
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self,request,pk=None):
+
+        qs = Expense.objects.get(id=pk)
+
+        serializer_instance = ExpenseSerializer(qs)
+
+        return Response(serializer_instance.data)
     
