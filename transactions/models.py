@@ -4,7 +4,7 @@ from accounts.models import User
 # Create your models here.
 
 
-#Expense [title,category,amount,description,owner[FK(User)],created_at,bill_image]
+
 
 class Expense(models.Model):
 

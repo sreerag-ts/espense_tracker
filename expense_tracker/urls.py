@@ -21,6 +21,8 @@ from accounts.views import SignUPView
 
 from transactions.views import ExpenseListCreateView
 
+from transactions.views import ExpenseRetrieveUpdateDeleteView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -29,6 +31,6 @@ urlpatterns = [
     #expenses
 
     path('expense/',ExpenseListCreateView.as_view()),
-    
+    path("expense/<int:pk>/",ExpenseRetrieveUpdateDeleteView.as_view())
     
 ]

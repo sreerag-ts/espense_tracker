@@ -1,14 +1,14 @@
-# api call for signup view
+# api call for register view
 ###
 POST http://127.0.0.1:8000/user/
 Content-Type: application/json
 
 {
-    "username": "sreerag",
-    "email": "sreerag@gmail.com",
+    "username": "adminn",
+    "email": "django@gmail.com",
     "password": "Password@123",
-    "phone": "9876543210",
-    "dob": "2003-05-15"
+    "phone": "12345777210",
+    "dob": "2003-05-12"
 }
 
 
@@ -16,4 +16,42 @@ Content-Type: application/json
 ###
 GET http://127.0.0.1:8000/expense/
 Accept: application/json
-Authorization: Basic django:password@123
+Authorization: Basic admin:admin@123
+
+#api call for adding expenses
+###
+POST http://127.0.0.1:8000/expense/
+Content-Type: application/json
+Authorization: Basic admin:admin@123
+
+{
+    "title":"temple",
+    "amount":2000,
+    "category":"personal"
+}
+
+#api call for fetching expense details
+###
+GET http://127.0.0.1:8000/expense/1/
+Accept: application/json
+Authorization: Basic admin:admin@123
+
+
+
+#api call for ,updating expense details
+###
+PUT  http://127.0.0.1:8000/expense/1/
+Content-Type: application/json
+Authorization: Basic admin:admin@123
+
+{
+  "id": 1,
+  "title": "snaks",
+  "category": "food",
+  "amount": "3000",
+  "description": null,
+  "payment_method": "upi",
+  "bill_image": null,
+  "created_at": "2026-11-17T13:23:54.625581Z",
+  "owner": 2
+}
