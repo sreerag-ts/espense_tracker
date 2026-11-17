@@ -13,7 +13,9 @@ from rest_framework.response import Response
 
 class ExpenseListCreateView(APIView):
 
-    authentication_classes = [authentication.BasicAuthentication]
+    # authentication_classes = [authentication.BasicAuthentication]
+    authentication_classes = [authentication.TokenAuthentication]
+
 
     permission_classes = [permissions.IsAuthenticated]
 
@@ -50,7 +52,9 @@ from transactions.permissions import IsOwner
 
 class ExpenseRetrieveUpdateDeleteView(APIView):
 
-    authentication_classes=[authentication.BasicAuthentication]
+    #authentication_classes=[authentication.BasicAuthentication]
+
+    authentication_classes = [authentication.TokenAuthentication]
 
     #permission_classes = [permissions.IsAuthenticated]
 
@@ -106,7 +110,8 @@ from datetime import datetime
 from django.db.models import Sum
 
 class ExpenceSummaryView(APIView):
-      authentication_classes = [authentication.BasicAuthentication]
+      #authentication_classes = [authentication.BasicAuthentication]
+      authentication_classes = [authentication.TokenAuthentication]
 
       permission_classes = [permissions.IsAuthenticated]
 
@@ -118,12 +123,23 @@ class ExpenceSummaryView(APIView):
                 "todays_total":0,
                 "monthly_total":0
            }
+           
+           #date
 
            curr_date = datetime.today().date()
 
            todays_total = auth_user_expences.filter(created_at__date = curr_date).values("amount").aggregate(total=Sum("amount")).get("total")
 
+           #month
+
+           curr_month = datetime.today().month
+
+           curr_year = datetime.today().year
+
+           monthly_total = auth_user_expences.filter(created_at__month=curr_month,created_at__year=curr_year).values("amount").aggregate(total=Sum("amount")).get("total")
+
            response_data["todays_total"]= todays_total
+           response_data["monthly_total"]=monthly_total
 
 
            return Response(response_data)
